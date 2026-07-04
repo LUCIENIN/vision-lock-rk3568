@@ -1,0 +1,26 @@
+[Unit]
+Description=Vision Lock Screen on RK3568
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+Environment=PYTHONUNBUFFERED=1
+Environment=VISION_LOCK_SIMPLE_RENDER=0
+Environment=DISPLAY=:0
+Environment=VISION_LOCK_MONITOR=HDMI-A-1
+Environment=VISION_LOCK_OVERLAY_STRETCH=0
+Environment=VISION_LOCK_FORCE_STYLE=text
+Environment=VISION_LOCK_FORCE_BACKEND=overlay
+Environment=VISION_LOCK_OVERLAY_FULLSCREEN=1
+Environment=LANG=zh_CN.UTF-8
+Environment=LC_ALL=zh_CN.UTF-8
+Environment=XAUTHORITY=/var/run/lightdm/root/:0
+Environment=PYTHONPATH=/opt/visual_lock_screen_rk3568/visual_lock_screen_rk3568/src
+ExecStartPre=/opt/visual_lock_screen_rk3568/deploy/normalize_hdmi_display.sh || true
+ExecStart=/usr/bin/python3 -m vision_lock.main --config /etc/visual-lock-screen/config.yaml
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

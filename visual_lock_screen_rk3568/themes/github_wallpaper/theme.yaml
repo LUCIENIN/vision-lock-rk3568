@@ -1,0 +1,25 @@
+name: github_wallpaper
+display_name: "壁纸风格"
+description: "毛玻璃面板 + 中央锁图标 + 分组卡片，参考 i3lock-fancy / betterlockscreen"
+
+fonts:
+  title_size_ratio: 0.048
+  body_size_ratio: 0.023
+  font_scale: 1.0
+
+colors:
+  accent: "#0ea5e9"
+  bg_top: "#0b1220"
+  bg_bottom: "#0f172a"
+  title: "#e2e8f0"
+  body: "#cbd5e1"
+
+decor:
+  modules:
+    - frost_panel
+    - lock_badge
+
+layout:
+  header_ratio: 0.24
+  pad_x_ratio: 0.03
+  pad_y_ratio: 0.022

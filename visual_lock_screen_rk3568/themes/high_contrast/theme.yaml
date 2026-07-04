@@ -1,0 +1,23 @@
+name: high_contrast
+display_name: "高对比文字"
+description: "深色背景 + 高对比白色文字面板，最少装饰，适合调试与低性能设备"
+
+fonts:
+  title_size_ratio: 0.058
+  body_size_ratio: 0.032
+  font_scale: 1.0
+
+colors:
+  accent: "#0ea5e9"
+  bg_top: "#080c18"
+  bg_bottom: "#080c18"
+  title: "#fafeff"
+  body: "#e2eeff"
+
+decor:
+  modules: []
+
+layout:
+  header_ratio: 0.24
+  pad_x_ratio: 0.02
+  pad_y_ratio: 0.02

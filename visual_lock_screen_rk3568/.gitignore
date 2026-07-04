@@ -1,0 +1,16 @@
+# output artifacts (track directory, not contents)
+tests/output/*
+!tests/output/.gitkeep
+
+# runtime logs
+logs/*
+!logs/.gitkeep
+
+# local config override (example.yaml is the reference)
+config/local.yaml
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/

@@ -1,0 +1,34 @@
+camera:
+  fps: 5
+  height: 480
+  source: /dev/video10
+  width: 640
+content:
+  cache_file: /tmp/visual_lock_screen_cache.json
+  tip_api: file:///tmp/visual_lock_screen_tip.json
+design:
+  accent_color: '#0ea5e9'
+  bg_color_bottom: '#0f172a'
+  bg_color_top: '#0b1220'
+  body_color: '#cbd5e1'
+  headline: "\u89C6\u89C9\u5DF2\u68C0\u6D4B\u5230\u4EBA\u5F62"
+  style: cyberpunk
+  subheadline: "\u9501\u5C4F\u6A21\u5F0F\u5DF2\u89E6\u53D1"
+  title_color: '#e2e8f0'
+detection:
+  cooldown_seconds: 20
+  idle_switch_seconds: 300
+  method: cascade
+  person_confidence: 0.45
+  trigger_frames: 3
+lock:
+  auto_unlock_seconds: 30
+  i3lock_command:
+  - timeout
+  - '30'
+  - i3lock
+  - -n
+  - -i
+  - '%IMAGE%'
+  image_path: /tmp/visual_lock_screen.png
+  mode: overlay

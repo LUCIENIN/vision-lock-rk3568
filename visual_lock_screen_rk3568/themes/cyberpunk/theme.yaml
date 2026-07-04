@@ -1,0 +1,45 @@
+name: cyberpunk
+display_name: "赛博朋克"
+description: "霓虹 HUD 顶栏、扫描线、网格、东方俄式混合装饰、金属密封层"
+
+fonts:
+  title_size_ratio: 0.055
+  body_size_ratio: 0.028
+  font_scale: 2.25
+
+colors:
+  accent: "#0ea5e9"
+  bg_top: "#0b1220"
+  bg_bottom: "#0f172a"
+  title: "#e2e8f0"
+  body: "#cbd5e1"
+  # 赛博朋克专属色板
+  panel: "#181e36"
+  deep: "#0c0e18"
+  steel: "#8496b6"
+  steel_dark: "#405269"
+  steel_edge: "#dee4fa"
+  electric: "#b2d5ff"
+  magenta: "#d6bef0"
+  cyan: "#bad4ff"
+  gold: "#e6cd8a"
+  edge_soft: "#9eadcb"
+  edge_mid: "#566792"
+
+decor:
+  modules:
+    - banner
+    - grid_lines
+    - scanline
+    - bar_graphics
+    - eastern_russian
+    - neon_glow
+    - lock_badge
+
+layout:
+  header_ratio: 0.205
+  card_margin_ratio: 0.21
+  card_height_ratio: 0.56
+  pad_x_ratio: 0.025
+  pad_y_ratio: 0.022
+  border_width: 5

@@ -1,0 +1,22 @@
+vision_lock v2.2 (当前)
+===================
+cyber_clean.py: v12 - 汇率72px恢复，穿衣建议下移
+engine.py:      v2  - SM欢迎词
+
+版本链:
+v12 ← 当前 | 汇率72px，和天气同大，左面板
+v11 | 汇率删除，欢迎词64px
+v10 | SM重口版欢迎词 (通用+识别)
+v9  | 汇率挪左上角(后删除)
+v8  | 完整重写，天气新闻对齐
+v7  | 北京时间+日落, 右上角
+v6  | 等宽科技字体
+v5  | 汇率左上角, 穿衣建议28px
+v4  | 中文UI
+v3  | 7条新闻
+
+md5:
+cyber_clean.py: 
+engine.py:      
+cyber_clean: c18592766110b0a14cb91a787e1eef34
+engine: 684de54ed87c84ac1b518a10e4013d90

@@ -1,0 +1,51 @@
+camera:
+  source: /dev/video9
+  width: 1280
+  height: 720
+  fps: 10
+
+detection:
+  # auto -> use OpenCV HOG fallback when no RKNN provider is enabled.
+  # supervision -> optional: use supervision container wrapper（如已安装）。
+  # 注意：缺少 supervision 时仍会自动回退到 HOG。
+  method: cascade
+  person_confidence: 0.3
+  # 连续 N 帧检测到人形才触发（防误报）
+  trigger_frames: 3
+  # 触发锁屏后至少等待 N 秒才允许再次触发
+  cooldown_seconds: 60
+
+lock:
+  # i3lock | overlay | auto
+  # 在当前 RK3568 桌面环境优先使用 overlay，避免 i3lock 抓取指针/键盘偶发失败导致空白。
+  mode: overlay
+  # Rendered image path used by i3lock/overlay.
+  image_path: /tmp/visual_lock_screen.png
+  # Seconds before auto-hide in overlay mode.
+  auto_unlock_seconds: 30
+  # If i3lock mode is used, keep %IMAGE% as placeholder.
+  i3lock_command: ["timeout", "30", "i3lock", "-n", "-i", "%IMAGE%"]
+
+design:
+  headline: "视觉已检测到人形"
+  subheadline: "锁屏模式已触发"
+  # theme_dir: themes/ 的相对路径或绝对路径，留空则默认 config/../themes/
+  # 可选: classic | github_wallpaper | fancy | cyberpunk | cyber | plain | safe | text | high_contrast
+  # text: 最少装饰、只保留高对比文字（用于排查乱码/比例异常）
+  # plain: 传统图形风格（装饰更多）
+  # safe: 与 plain 接近，但字体与行距更保守
+  # text: 最少装饰、只保留高对比文字
+  # high_contrast: 高对比度文字模式（推荐 RK3568）
+  style: high_contrast
+  accent_color: "#0ea5e9"
+  bg_color_top: "#0b1220"
+  bg_color_bottom: "#0f172a"
+  title_color: "#e2e8f0"
+  body_color: "#cbd5e1"
+
+content:
+  # 可按需接入本地API，默认指向本机离线文案文件。
+  # 例如：
+  # file:///tmp/visual_lock_screen_tip.json
+  tip_api: "file:///tmp/visual_lock_screen_tip.json"
+  cache_file: /tmp/visual_lock_screen_cache.json

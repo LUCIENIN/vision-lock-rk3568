@@ -1,0 +1,23 @@
+name: plain
+display_name: "简洁面板"
+description: "浅色背景 + 深色文字，传统图形风格"
+
+fonts:
+  title_size_ratio: 0.048
+  body_size_ratio: 0.023
+  font_scale: 1.0
+
+colors:
+  accent: "#0d2343"
+  bg_top: "#f0f6ff"
+  bg_bottom: "#f0f6ff"
+  title: "#09182d"
+  body: "#1e395a"
+
+decor:
+  modules: []
+
+layout:
+  header_ratio: 0.24
+  pad_x_ratio: 0.02
+  pad_y_ratio: 0.02
