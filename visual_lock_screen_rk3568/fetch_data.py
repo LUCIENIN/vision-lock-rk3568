@@ -30,9 +30,23 @@ def get_location():
             c = d.get("city","") or d.get("region","")
             lat = d.get("latitude") or d.get("lat") or 59.9
             lon = d.get("longitude") or d.get("lng") or 30.3
-            if c: return c, float(lat), float(lon)
+            if c:
+                # Translate to Chinese
+                CITY_CN = {"Saint Petersburg":"圣彼得堡","St Petersburg":"圣彼得堡","Moscow":"莫斯科"}
+                c = CITY_CN.get(c, c)
+                return c, float(lat), float(lon)
         except: pass
-    return "Saint Petersburg", 59.93, 30.34
+    # Translate city names to Chinese
+    CITY_CN = {
+        "Saint Petersburg": "圣彼得堡",
+        "St Petersburg": "圣彼得堡",
+        "Moscow": "莫斯科",
+        "Saint-Peterburg": "圣彼得堡",
+        "Sankt-Peterburg": "圣彼得堡",
+        "Leningrad": "圣彼得堡",
+        "Petrograd": "圣彼得堡",
+    }
+    return CITY_CN.get("Saint Petersburg", "圣彼得堡"), 59.93, 30.34
 
 def get_weather_json(city):
     """Get weather via wttr.in simple format (fast, includes UV)."""
