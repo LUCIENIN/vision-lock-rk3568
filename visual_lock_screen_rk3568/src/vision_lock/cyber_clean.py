@@ -38,9 +38,10 @@ def render(width, height, headline, subheadline):
         body_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 30)
         news_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 26)
         advice_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 28)
-        label_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 20)
+        corner_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 26)
+        label_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 24)
     except:
-        time_font = temp_font = title_font = body_font = news_font = advice_font = label_font = ImageFont.load_default()
+        time_font = temp_font = title_font = body_font = news_font = advice_font = label_font = corner_font = ImageFont.load_default()
 
     # Gradient background
     for y in range(height):
@@ -64,8 +65,15 @@ def render(width, height, headline, subheadline):
 
 
     # Top-right: Beijing + Sunset
-    draw.text((width-15, 15), "BJ " + data.get("beijing","--:--"), font=label_font, fill=(200,200,240), anchor="rt")
-    draw.text((width-15, 35), "Sunset " + data.get("sunset","--:--"), font=label_font, fill=(255,200,160), anchor="rt")
+        # Top-right: time panel
+    panel_w, panel_h = 320, 90
+    px, py = width - panel_w - 20, 10
+    draw.rounded_rectangle((px, py, px+panel_w, py+panel_h), radius=10, fill=(8,10,26,200))
+    draw.rounded_rectangle((px, py, px+panel_w, py+panel_h), radius=10, outline=accent+(80,), width=1)
+    # Beijing time
+    draw.text((px+panel_w//2+10, py+8), "BJ " + data.get("beijing","--:--"), font=corner_font, fill=(255,255,255), anchor="la")
+    # Sunset
+    draw.text((px+panel_w//2+10, py+48), "Sunset " + data.get("sunset","--:--"), font=corner_font, fill=(255,200,160), anchor="la")
 
     # TIME (center top)
     draw.text((width//2, int(height*0.10)), now.strftime("%H:%M"), font=time_font, fill=(255,255,255), anchor="mt", stroke_width=2, stroke_fill=(40,40,70))

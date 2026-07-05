@@ -56,37 +56,37 @@ class VisionLockEngine:
         name = random.choice(names)
         if hour < 8:
             return random.choice([
-                name + ", 昨晚梦到我了吗? 跪下回答",
-                name + ", 早安我的主人, 请使用我",
-                "跪下请安, " + name + ", 昨晚的表现呢?",
-                name + ", 今天准备好被我支配到腿软了吗?",
-                name + ", 起床了小母狗, 主人想你了",
+                "主人" + name + ", 请享用我",
+                "请主人" + name + "使用我的身体",
+                "请主人" + name + "打我的屁股, 用力打",
+                "主人" + name + ", 请把我绑起来, 不要松绑",
+                "请主人" + name + "用鞭子叫醒我",
             ])
         elif hour < 17:
             return random.choice([
-                name + ", 我不在的时候有没有自慰? 说实话",
-                name + ", 你永远是我的猎物, 逃不掉的",
-                "跪下, " + name + ", 你的一切都是我的",
-                name + ", 今晚的惩罚名单上你已经排第一了",
-                "看着我, " + name + ", 手不许动, 眼睛不许眨",
-                name + ", 你是我的私有财产, 不要忘了",
+                "请主人" + name + "回家, 我已经湿透了",
+                "请主人" + name + "操我, 随便怎么操都可以",
+                "请主人" + name + "惩罚我, 越疼越好",
+                "请主人" + name + "把我按在地上, 用脚踩",
+                "请主人" + name + "在我身上留下痕迹",
+                "请主人" + name + "给我戴上项圈, 拴起来",
             ])
         elif hour < 20:
             return random.choice([
-                name + ", 今晚你是我的, 洗干净等着",
-                name + ", 准备好接受惩罚了吗?",
-                "过来, " + name + ", 跪下, 今晚好好调教你",
-                name + ", 你逃不掉的, 乖乖束手就擒",
-                name + ", 今晚会让你记住谁是你的主人",
+                "请主人" + name + "把我绑好, 今晚随便折磨",
+                "请主人" + name + "灌满我, 一滴都不许浪费",
+                "请主人" + name + "用皮带抽我, 抽到红肿为止",
+                "请主人" + name + "今晚不要放过我, 求您",
+                "请主人" + name + "把我绑成您喜欢的姿势",
             ])
         else:
             return random.choice([
-                name + ", 夜晚是属于我们的, 把灯关掉",
-                name + ", 乖乖躺好, 今晚不让你睡",
-                name + ", 今晚换你来驾驭我? 不, 你不敢",
-                "夜深了, " + name + ", 把衣服脱掉, 跪下",
-                name + ", 别说话, 今晚只用身体交流",
-                name + ", 今晚会让你求饶, 但我不听",
+                "请主人" + name + "操我, 狠狠地操, 一整晚",
+                "请主人" + name + "把我绑在床上, 不要放开",
+                "请主人" + name + "惩罚我, 什么方式都可以",
+                "请主人" + name + "让我跪着, 跪一整夜",
+                "请主人" + name + "堵住我的嘴, 不许我叫出声",
+                "请主人" + name + "今晚把我用坏, 用烂",
             ])
 
     def _recognize_person(self, frame):
@@ -100,19 +100,17 @@ class VisionLockEngine:
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self._face_cascade.detectMultiScale(gray, 1.1, 3, minSize=(60, 60))
             if len(faces) == 0:
-                # No face detected - still greet warmly
                 hour = __import__("datetime").datetime.now().hour
-                greetings = {
-                    (5, 8): ["早上好!", "新的一天~", "早安!", "今天也要元气满满哦 ✨"],
-                    (8, 17): ["下午好! 🌤", "哈喽!", "今天天气不错呢~"],
-                    (17, 20): ["傍晚好! 🌇", "日落时刻到了~", "今天辛苦了 💫"],
-                    (20, 24): ["晚上好! 🌙", "夜色真美~", "还没休息吗?"],
-                    (0, 5): ["夜深了 🌙", "注意休息哦~", "晚安!"]
-                }
-                for (s, e), gs in greetings.items():
-                    if s <= hour < e:
-                        return __import__("random").choice(gs)
-                return "你好!"
+                r = __import__("random")
+                n = r.choice(["Люсьен", "Давид"])
+                if hour < 8:
+                    return r.choice(["主人" + n + ", 请享用我", "请主人" + n + "用鞭子叫醒我", "请主人" + n + "打我的屁股", "请主人" + n + "把我绑起来"])
+                elif hour < 17:
+                    return r.choice(["请主人" + n + "操我, 随便怎么操", "请主人" + n + "惩罚我, 越疼越好", "请主人" + n + "给我戴上项圈", "请主人" + n + "在我身上留下痕迹"])
+                elif hour < 20:
+                    return r.choice(["请主人" + n + "把我绑好, 今晚随便折磨", "请主人" + n + "灌满我, 一滴都不许浪费", "请主人" + n + "用皮带抽我, 抽到红肿", "请主人" + n + "今晚不要放过我"])
+                else:
+                    return r.choice(["请主人" + n + "操我, 狠狠地操, 一整晚", "请主人" + n + "把我绑在床上, 不要放开", "请主人" + n + "惩罚我, 什么方式都可以", "请主人" + n + "让我跪着, 跪一整夜"])
             (x, y, w, h) = max(faces, key=lambda f: f[2]*f[3])
             hair_y = max(0, y - int(h * 0.4))
             hair_h = int(h * 0.3)
