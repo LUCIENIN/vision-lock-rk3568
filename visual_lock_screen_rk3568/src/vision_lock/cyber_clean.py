@@ -37,7 +37,7 @@ def render(width, height, headline, subheadline):
         title_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 64)
         body_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 30)
         news_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 34)
-        advice_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 36)
+        advice_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", 42)
         corner_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 28)
         label_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf", 24)
     except:
@@ -83,35 +83,35 @@ def render(width, height, headline, subheadline):
     draw.text((left_x, panel_y+80), w["desc"], font=body_font, fill=(220,220,240))
     draw.text((left_x, panel_y+118), w["city"], font=label_font, fill=(160,160,180))
     draw.text((left_x, panel_y+148), "Beijing " + data.get("beijing","--:--") + "  ·  Sunset " + data.get("sunset","--:--"), font=corner_font, fill=(255,255,255))
-    # Exchange rate — arrow appended inline, no extra line
+    # Exchange rate with colored triangle indicator
     rate_num = data.get("rate", "--")
     rate_dir = data.get("rate_direction", "")
-    # Draw rate number in white
-    rate_text = "CNY/RUB " + rate_num + " "
-    draw.text((left_x, panel_y+170), rate_text, font=temp_font, fill=(255,255,255))
-    # Append colored arrow right after the number
-    if rate_dir:
-        if "↑" == rate_dir:
-            arrow_color = (100, 255, 130)
-        elif "↓" == rate_dir:
-            arrow_color = (255, 100, 110)
-        else:
-            arrow_color = (160, 160, 180)
-        tw = draw.textlength(rate_text, font=temp_font)
-        draw.text((left_x + tw, panel_y+170), rate_dir, font=temp_font, fill=arrow_color)
+    tri_x = left_x + 2
+    tri_y = panel_y + 178
+    tri_s = 14  # triangle size
+    if rate_dir == "↑":
+        tri_color = (100, 255, 130)
+        # upward triangle ▲
+        draw.polygon([(tri_x, tri_y+tri_s), (tri_x+tri_s, tri_y+tri_s), (tri_x+tri_s//2, tri_y)], fill=tri_color)
+    elif rate_dir == "↓":
+        tri_color = (255, 100, 110)
+        # downward triangle ▼
+        draw.polygon([(tri_x, tri_y), (tri_x+tri_s, tri_y), (tri_x+tri_s//2, tri_y+tri_s)], fill=tri_color)
+    else:
+        tri_color = (160, 160, 180)
+    # Draw rate text to the right of triangle
+    rate_text = "CNY/RUB " + rate_num
+    draw.text((left_x + tri_s + 10, panel_y+170), rate_text, font=temp_font, fill=(255,255,255))
 
-    # Advice — prominent weather tips with bg panel
-    if data["advice"]:
-        adv_y = panel_y + 245
+    # Advice — weather tips below rate with generous spacing
+    if data.get("advice"):
+        adv_y = panel_y + 290
         adv_text = data["advice"]
-        # Measure text to draw background box
         adv_w = draw.textlength(adv_text, font=advice_font)
-        # Dark semi-transparent pill behind text
         pad_x, pad_y = 14, 10
         draw.rounded_rectangle(
-            (left_x - pad_x, adv_y - pad_y, left_x + adv_w + pad_x, adv_y + 48),
+            (left_x - pad_x, adv_y - pad_y, left_x + adv_w + pad_x, adv_y + 50),
             radius=12, fill=(20, 20, 40))
-        # Bright gold bold text
         draw.text((left_x, adv_y), adv_text, font=advice_font,
                   fill=(255, 240, 80), stroke_width=1, stroke_fill=(80, 60, 20))
 
